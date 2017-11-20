@@ -5,6 +5,8 @@
  */
 package keuangansmk;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author azhzh
@@ -16,6 +18,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -40,11 +43,11 @@ public class MainMenu extends javax.swing.JFrame {
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 712, Short.MAX_VALUE)
+            .addGap(0, 668, Short.MAX_VALUE)
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 418, Short.MAX_VALUE)
         );
 
         getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
@@ -83,7 +86,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        this.hide();
+        this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

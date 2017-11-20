@@ -29,7 +29,8 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
         model.addColumn("NAMA");
         model.addColumn("KELAS");
         model.addColumn("JENIS KELAMIN");
-        
+        model.addColumn("");
+        model.addColumn("");
         //menampilkan data database kedalam tabel
         try {
             String sql = "select * from siswa";
@@ -37,7 +38,7 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getInt(3),res.getString(4),res.getString(2),res.getString(5)});
+                model.addRow(new Object[]{res.getInt(3),res.getString(4),res.getString(2),res.getString(5), "Detail Siswa" , "Pembayaran Siswa"});
             }
             tbSiswa.setModel(model);
         } catch (Exception e) {
@@ -76,9 +77,15 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbSiswa.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(tbSiswa);
 
         jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Save");
 
@@ -89,7 +96,7 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)
@@ -101,16 +108,21 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        loadData();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
