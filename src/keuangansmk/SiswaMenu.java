@@ -6,13 +6,20 @@
 package keuangansmk;
 
 import java.awt.Component;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -24,9 +31,12 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
      * Creates new form SiswaMenu
      */
     
-    public SiswaMenu() {
+    private Connection conn;
+    
+    public SiswaMenu() throws SQLException {
         initComponents();
         loadData();
+        conn = connect.configDB();
     }
     
     private void loadData(){
@@ -45,7 +55,7 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getInt(3),res.getString(4),DBHelper.getNamaKelasId(res.getInt(2)),res.getString(5), "Detail Siswa" , "Pembayaran Siswa"});
+                model.addRow(new Object[]{res.getInt(2),res.getString(3),res.getString(4),res.getString(5), "Detail Siswa" , "Pembayaran Siswa"});
             }
             dgvSiswa.setModel(model);
         } catch (Exception e) {
@@ -63,12 +73,12 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
         model.addColumn("");
         //menampilkan data database kedalam tabel
         try {
-            String sql = "select * from siswa where nis like '%" + tbNama.getText() + "%' or nama like '%" + tbNama.getText() + "%'";
+            String sql = "select * from siswa where nis like '%" + tbNama.getText() + "%' or nama like '%" + tbNama.getText() + "%' or kelas like '%" + tbNama.getText() + "%'";
             java.sql.Connection conn=(Connection)connect.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getInt(3),res.getString(4),DBHelper.getNamaKelasId(res.getInt(2)),res.getString(5), "Detail Siswa" , "Pembayaran Siswa"});
+                model.addRow(new Object[]{res.getInt(2),res.getString(3),res.getString(4),res.getString(5), "Detail Siswa" , "Pembayaran Siswa"});
             }
             dgvSiswa.setModel(model);
         } catch (Exception e) {
@@ -92,11 +102,11 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
         tbNama = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setResizable(true);
 
         dgvSiswa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,6 +146,13 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Data Siswa");
 
+        jButton1.setText("Laporan Pembayaran");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,17 +162,18 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tbNama, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSearch)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRefresh)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel2)
+                        .addGap(0, 706, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tbNama, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRefresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -168,7 +186,8 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tbNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSearch)
-                        .addComponent(btnRefresh))
+                        .addComponent(btnRefresh)
+                        .addComponent(jButton1))
                     .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,13 +227,30 @@ public class SiswaMenu extends javax.swing.JInternalFrame {
             d.show();
         }else if(index == 5){
             //pembayaran
+            FormDialog d = new FormDialog(new javax.swing.JFrame(), true,nis);
+            d.show();
         }
     }//GEN-LAST:event_dgvSiswaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            ClassLoader cl = getClass().getClassLoader();
+            InputStream in = cl.getResourceAsStream("report1.jasper");
+            JasperPrint p = JasperFillManager.fillReport(in , new HashMap(), conn);
+            
+            JasperViewer.viewReport(p, false);
+            
+        }catch(JRException ex){
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JTable dgvSiswa;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label1;

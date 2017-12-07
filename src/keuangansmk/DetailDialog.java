@@ -25,15 +25,27 @@ public class DetailDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         tbNis.setText(nis);
+        
+        //spp
+        int totalSpp = DBHelper.getTunggakanSpp(nis);
+        int a = DBHelper.getTotalSpp(Integer.parseInt(nis));
+        int sisaSpp = totalSpp - a;
+        
+        //dsp
+        int totalDsp = DBHelper.getTunggakanDsp(nis);
+        int b = DBHelper.getTotalDsp(Integer.parseInt(nis));
+        int sisaDsp = totalDsp - b;
         try {
             String sql = "select * from siswa where nis = " + nis + "";
             java.sql.Connection conn=(Connection)connect.configDB();
             java.sql.Statement stm=conn.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                tbNama.setText(res.getString(4));
+                tbNama.setText(res.getString(3));
                 tbJk.setText(res.getString(5));
-                tbKelas.setText(DBHelper.getNamaKelasId(res.getInt(2)));
+                tbKelas.setText(res.getString(4));
+                tbSpp.setText(String.valueOf(sisaSpp));
+                tbDsp.setText(String.valueOf(sisaDsp));
             }
         } catch (Exception e) {
         
