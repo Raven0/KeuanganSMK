@@ -3,8 +3,8 @@
 	<property name="ireport.zoom" value="1.2100000000000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT * FROM `siswa` WHERE jumlahSpp < 500000]]>
+	<queryString>
+		<![CDATA[SELECT * FROM `siswa` WHERE jumlahDsp < 2000000]]>
 	</queryString>
 	<field name="id_siswa" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -45,14 +45,14 @@
 					<textElement>
 						<font size="18" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Laporan Tunggakan SPP]]></text>
+					<text><![CDATA[Laporan Tunggakan DSP]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="20" y="51" width="234" height="20" forecolor="#FFFFFF" uuid="138df2c0-518d-4092-9648-b831a2005d29"/>
 					<textElement textAlignment="Left">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Berdasarkan Total Pembayaran Spp]]></text>
+					<text><![CDATA[Berdasarkan Total Pembayaran DSP]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -98,7 +98,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total SPP]]></text>
+				<text><![CDATA[Total DSP]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -140,7 +140,7 @@
 				<textElement textAlignment="Center">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{jumlahSpp}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{jumlahDsp}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e8f393ca-7455-4aed-858f-6c282f43a9e1">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
-	<property name="ireport.x" value="213"/>
+	<property name="ireport.x" value="212"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
@@ -63,27 +63,33 @@
 			</line>
 			<staticText>
 				<reportElement style="Column header" x="0" y="19" width="92" height="15" uuid="b8303004-ff15-4f6a-aa52-2522c863ace6"/>
-				<text><![CDATA[nis]]></text>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NIS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="92" y="19" width="92" height="15" uuid="49682a31-8844-4ab4-98c0-1d0daf2bc436"/>
-				<text><![CDATA[nama]]></text>
+				<reportElement style="Column header" x="92" y="19" width="120" height="15" uuid="49682a31-8844-4ab4-98c0-1d0daf2bc436"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nama]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="184" y="19" width="92" height="15" uuid="eaf6c0a9-27c2-4237-ad2d-4820f523753b"/>
-				<text><![CDATA[kelas]]></text>
+				<reportElement style="Column header" x="212" y="19" width="64" height="15" uuid="eaf6c0a9-27c2-4237-ad2d-4820f523753b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Kelas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="276" y="19" width="92" height="15" uuid="37c4f609-b35a-43ec-9ff4-4aed8d828c97"/>
-				<text><![CDATA[pembayaran]]></text>
+				<reportElement style="Column header" x="276" y="19" width="73" height="15" uuid="37c4f609-b35a-43ec-9ff4-4aed8d828c97"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Pembayaran]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="368" y="19" width="92" height="15" uuid="8089c532-50e1-414e-ae62-38045d0d67b4"/>
-				<text><![CDATA[tanggal]]></text>
+				<reportElement style="Column header" x="349" y="19" width="84" height="15" uuid="8089c532-50e1-414e-ae62-38045d0d67b4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tanggal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="460" y="19" width="92" height="15" uuid="b743b503-c9fa-4f9f-821b-48cbe36f476f"/>
-				<text><![CDATA[jumlah]]></text>
+				<reportElement style="Column header" x="433" y="19" width="122" height="15" uuid="b743b503-c9fa-4f9f-821b-48cbe36f476f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jumlah]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -97,26 +103,32 @@
 			</line>
 			<textField>
 				<reportElement style="Detail" x="0" y="0" width="92" height="15" uuid="8f8412f6-7afb-4d22-8ac7-fe9bb5965a40"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nis}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="92" y="0" width="92" height="15" uuid="7d40e6d5-1260-4100-8ae4-80169e8820f5"/>
+				<reportElement style="Detail" x="92" y="0" width="120" height="15" uuid="7d40e6d5-1260-4100-8ae4-80169e8820f5"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="184" y="0" width="92" height="15" uuid="26d98e3a-3ac1-48df-b259-17efb9bfb80c"/>
+				<reportElement style="Detail" x="212" y="0" width="64" height="15" uuid="26d98e3a-3ac1-48df-b259-17efb9bfb80c"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{kelas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="276" y="0" width="92" height="15" uuid="d531df0a-7c25-49cf-9e17-6848b990546c"/>
+				<reportElement style="Detail" x="276" y="0" width="73" height="15" uuid="d531df0a-7c25-49cf-9e17-6848b990546c"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{jenis_pembayaran}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="368" y="0" width="92" height="15" uuid="2c429359-2c1e-40e6-80d0-5157a6a21d10"/>
-				<textFieldExpression><![CDATA[$F{tanggal_bayar}]]></textFieldExpression>
+				<reportElement style="Detail" x="349" y="0" width="84" height="15" uuid="2c429359-2c1e-40e6-80d0-5157a6a21d10"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tanggal_bayar}.toLocaleString()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="460" y="0" width="92" height="15" uuid="c129315a-739d-431a-8268-92fa29c50e64"/>
+				<reportElement style="Detail" x="433" y="0" width="122" height="15" uuid="c129315a-739d-431a-8268-92fa29c50e64"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -129,6 +141,16 @@
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<textField>
+				<reportElement style="Detail" x="433" y="19" width="122" height="15" uuid="afe2801e-7823-44dc-a610-4e1c61872a80"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{REPORT_MAX_COUNT}.sum( $F{jumlah}, $F{jumlah} )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="433" y="4" width="122" height="15" uuid="b71e63ac-7de7-48ca-9c68-77b69ce3ff3b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
